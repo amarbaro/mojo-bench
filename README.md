@@ -1,5 +1,9 @@
 # mojo-bench
 
+<!-- badges -->
+[![ci](https://github.com/amarbaro/mojo-bench/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/amarbaro/mojo-bench/actions/workflows/ci.yml) [![latest release](https://img.shields.io/github/v/release/amarbaro/mojo-bench)](https://github.com/amarbaro/mojo-bench/releases/latest) [![license](https://img.shields.io/github/license/amarbaro/mojo-bench)](https://github.com/amarbaro/mojo-bench/blob/main/LICENSE) [![checks](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/amarbaro/mojo-bench/badges/checks.json)](https://github.com/amarbaro/mojo-bench/actions/workflows/ci.yml)
+<!-- /badges -->
+
 <!-- install -->
 Install: `pixi add mojo-bench` once published. For now: `git clone https://github.com/amarbaro/mojo-bench`, then `mojo run -I mojo-bench/src app.mojo`.
 
