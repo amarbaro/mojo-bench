@@ -23,6 +23,10 @@ if [[ $IMPL == .work/cases ]]; then
   cap python3 -I tools/oracle.py --broken .work/cases.txt 2>/dev/null | cmp -s - .work/want-$key.txt && { echo "FAIL negative control: broken oracle passed the diff"; exit 1; }
   echo "negative control: tools/oracle.py --broken differs from the reference, as it must"
   $M run -I src tests/behavior.mojo || { echo "FAIL behavior: tests/behavior.mojo"; exit 1; }
-  $M run -I src examples/quickstart.mojo > /dev/null || { echo "FAIL example: examples/quickstart.mojo"; exit 1; }
+  for e in "quickstart README.md" "api docs/api.md"; do  # each doc code block is a compiled example, byte for byte
+    set -- $e
+    python3 -I -c 'import re, sys; b = re.findall(r"```mojo\n(.*?)\n```", open(sys.argv[2]).read(), re.S); sys.exit(open(sys.argv[1]).read().rstrip() not in b)' examples/$1.mojo $2 || { echo "FAIL doc: $2 block differs from examples/$1.mojo"; exit 1; }
+    $M run -I src examples/$1.mojo > /dev/null || { echo "FAIL example: examples/$1.mojo"; exit 1; }
+  done
 fi
 echo "PASS all"
