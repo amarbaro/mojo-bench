@@ -18,4 +18,3 @@ def main():
     var c = compare(r[0].samples, r[1].samples)  # speedup of fast over slow, with a 95% CI
     print(table(r))
     print(c.speedup, "x [", c.lo, ",", c.hi, "]", c.verdict)
-    print(r[1].json())
