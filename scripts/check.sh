@@ -6,7 +6,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p .work
-cap() { timeout 90 systemd-run --user --scope -q -p MemoryMax=4G -p MemorySwapMax=0 "$@"; }  # exit 137 = over the 4G cap = a bug
+if systemd-run --user --scope -q true 2>/dev/null; then  # no user systemd (CI containers): run uncapped
+  cap() { timeout 90 systemd-run --user --scope -q -p MemoryMax=4G -p MemorySwapMax=0 "$@"; }  # exit 137 = over the 4G cap = a bug
+else cap() { timeout 90 "$@"; }; fi
 M="cap .venv/bin/mojo"
 IMPL=${IMPL:-.work/cases}
 if [[ $IMPL == .work/cases ]]; then
