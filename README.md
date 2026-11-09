@@ -5,7 +5,8 @@
 <!-- /badges -->
 
 <!-- install -->
-Install: `pixi add mojo-bench` once published. For now: `git clone https://github.com/amarbaro/mojo-bench`, then `mojo run -I mojo-bench/src app.mojo`.
+Install: `pixi workspace channel add https://conda.modular.com/max https://prefix.dev/amarbaro/amarbaro`, then `pixi add mojo-bench` (import `bench`). From source: `git clone https://github.com/amarbaro/mojo-bench`, then `mojo run -I mojo-bench/src app.mojo`.
+Toolchains: Mojo 1.2 stable, and the nightly 1.3.0.dev2026110805 in the weekly [mojo-libs](https://github.com/amarbaro/mojo-libs) matrix (36 libraries on stable, 35 on nightly).
 
 ```mojo
 from std.benchmark import keep
@@ -56,6 +57,8 @@ Docs: [api](docs/api.md), [design](docs/design.md), [perf](docs/perf.md).
 `scripts/bench.sh`: `stats()` of 200 samples with 1000 bootstrap replicates, 20 times:
 Mojo 14 to 15 ms, Python oracle 1662 to 1721 ms (about 115x), peak RSS 11 MB against 12 MB.
 A function 2x slower reads 2.00x with a CI of about 1.99 to 2.01 (varies by run); two copies of one function read "no difference".
+
+**Limits:** Samples are wall-clock (`perf_counter_ns`), in ns per call. Compare timings from one `bench2` call, not from two separate runs. "No difference" means the bootstrap CIs overlap, not that the medians are equal.
 
 ## Checks
 
