@@ -1,0 +1,4 @@
+name = "mojo-bench"
+version = "0.1.1"
+description = "Benchmark harness for Mojo with statistics: warmup, auto iteration count, median, MAD, p95, seeded bootstrap CI, compare"
+tags = ["mojo", "benchmark", "statistics"]
